@@ -1,164 +1,168 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Platform/DevOps Engineer",
+  "name": "Rasmus - Platform/DevOps Engineer",
+  "favicon": "/favicon.svg",
   "colors": {
-    "primary": "#ff0000"
+    "primary": "#2563eb",
+    "light": "#3b82f6",
+    "dark": "#1d4ed8"
   },
   "navigation": {
     "dropdowns": [
       {
-        "dropdown": "About",
+        "dropdown": "👨‍💻 About Me",
         "icon": "user",
-        "description": "About Rasmus - Platform/DevOps Engineer",
+        "description": "Professional profile and background",
         "groups": [
           {
             "group": "Introduction",
             "pages": [
-              "index"
+              "about/introduction"
             ]
           }
         ]
       },
       {
-        "dropdown": "Bookmarks",
-        "icon": "bookmark",
-        "description": "Curated links and resources organized by category",
+        "dropdown": "🔧 DevOps & Infrastructure",
+        "icon": "server",
+        "description": "Infrastructure, automation, and platform engineering guides",
+        "groups": [
+          {
+            "group": "Linux Systems",
+            "pages": [
+              "infrastructure/linux/overview",
+              "infrastructure/linux/fundamentals",
+              "infrastructure/linux/system-admin",
+              "infrastructure/linux/automation"
+            ]
+          },
+          {
+            "group": "Windows Administration",
+            "pages": [
+              "infrastructure/windows/overview",
+              "infrastructure/windows/powershell",
+              "infrastructure/windows/wsl"
+            ]
+          },
+          {
+            "group": "Container Orchestration",
+            "pages": [
+              "infrastructure/containers/kubernetes",
+              "infrastructure/containers/helm"
+            ]
+          }
+        ]
+      },
+      {
+        "dropdown": "💡 Tools & Resources",
+        "icon": "toolbox",
+        "description": "Curated tools, configurations, and useful resources",
+        "groups": [
+          {
+            "group": "Development Tools",
+            "pages": [
+              "tools/development/overview",
+              "tools/development/git",
+              "tools/development/vscode",
+              "tools/development/nodejs"
+            ]
+          },
+          {
+            "group": "DevOps Utilities", 
+            "pages": [
+              "tools/devops/specfiles",
+              "tools/devops/automation"
+            ]
+          }
+        ]
+      },
+      {
+        "dropdown": "📚 Knowledge Base",
+        "icon": "book-open",
+        "description": "Organized bookmarks and reference materials",
         "groups": [
           {
             "group": "Technology & Development",
             "pages": [
-              "bookmarks/tech",
-              "bookmarks/developer",
-              "bookmarks/ai",
-              "bookmarks/http"
+              "knowledge/tech-tools",
+              "knowledge/development",
+              "knowledge/ai-resources",
+              "knowledge/networking"
             ]
           },
           {
             "group": "Infrastructure & Security",
             "pages": [
-              "bookmarks/linux",
-              "bookmarks/kubernetes",
-              "bookmarks/security"
+              "knowledge/linux-resources",
+              "knowledge/kubernetes-resources", 
+              "knowledge/security"
             ]
           },
           {
-            "group": "Platform Specific",
+            "group": "Platforms & Services",
             "pages": [
-              "bookmarks/windows",
-              "bookmarks/discord"
-            ]
-          },
-          {
-            "group": "Personal & Lifestyle",
-            "pages": [
-              "bookmarks/games",
-              "bookmarks/health",
-              "bookmarks/miscellaneous"
+              "knowledge/windows-resources",
+              "knowledge/discord",
+              "knowledge/miscellaneous"
             ]
           }
         ]
       },
       {
-        "dropdown": "Good Stuff",
-        "icon": "star",
-        "description": "Useful tools, tips, and configurations",
+        "dropdown": "🚀 Projects",
+        "icon": "rocket",
+        "description": "Personal projects and ongoing work",
         "groups": [
           {
-            "group": "Development Tools",
+            "group": "Active Development",
             "pages": [
-              "goodstuff/index",
-              "goodstuff/git",
-              "goodstuff/nodejs",
-              "goodstuff/vscode"
-            ]
-          },
-          {
-            "group": "Infrastructure & DevOps",
-            "pages": [
-              "goodstuff/helm",
-              "goodstuff/specfiles"
+              "projects/overview",
+              "projects/autocopr",
+              "projects/work-in-progress"
             ]
           }
         ]
       },
       {
-        "dropdown": "Linux",
-        "icon": "terminal",
-        "description": "Linux administration, configuration, and automation",
+        "dropdown": "🌐 Documentation Hub",
+        "icon": "book-bookmark",
+        "description": "About this documentation site (docs.rasmusj.dk)",
         "groups": [
           {
-            "group": "Fundamentals",
+            "group": "Documentation Site",
             "pages": [
-              "linux/basic",
-              "linux/aliases",
-              "linux/sources"
-            ]
-          },
-          {
-            "group": "System Administration",
-            "pages": [
-              "linux/ubuntu",
-              "linux/lvm",
-              "linux/requirements"
-            ]
-          },
-          {
-            "group": "Automation & Configuration",
-            "pages": [
-              "linux/ansible",
-              "linux/puppet"
-            ]
-          },
-          {
-            "group": "Shell & Tools",
-            "pages": [
-              "linux/fish"
-            ]
-          }
-        ]
-      },
-      {
-        "dropdown": "Windows",
-        "icon": "windows",
-        "description": "Windows administration and PowerShell",
-        "groups": [
-          {
-            "group": "Administration",
-            "pages": [
-              "windows/powershell",
-              "windows/wsl"
-            ]
-          }
-        ]
-      },
-      {
-        "dropdown": "Projects",
-        "icon": "code",
-        "description": "Personal projects and work-in-progress items",
-        "groups": [
-          {
-            "group": "Active Projects",
-            "pages": [
-              "projects/work-in-progress",
-              "projects/autocopr"
-            ]
-          }
-        ]
-      },
-      {
-        "dropdown": "Website",
-        "icon": "globe",
-        "description": "Information about main website",
-        "groups": [
-          {
-            "group": "Documentation",
-            "pages": [
-              "website/website"
+              "meta/about-docs-site"
             ]
           }
         ]
       }
     ]
-  }
+  },
+  "tabs": [
+    {
+      "name": "Quick Start",
+      "url": "about"
+    },
+    {
+      "name": "Infrastructure",
+      "url": "infrastructure"
+    },
+    {
+      "name": "Resources",
+      "url": "resources"
+    }
+  ],
+  "anchors": [
+    {
+      "name": "GitHub",
+      "icon": "github",
+      "url": "https://github.com"
+    },
+    {
+      "name": "LinkedIn", 
+      "icon": "linkedin",
+      "url": "https://linkedin.com"
+    }
+  ]
 }
