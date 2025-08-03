@@ -1,7 +1,7 @@
 version: '2.1'
 
 orbs:
-  megalinter: relativesure/megalinter@2.0.0
+  megalinter: relativesure/megalinter@2.1.1
 
 workflows:
   run-megalinter:
