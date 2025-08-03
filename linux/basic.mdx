@@ -1,0 +1,167 @@
+---
+title: Basic Linux Commands
+description: Essential Linux commands that work across all distributions
+---
+
+These fundamental commands work across all Linux distributions and form the foundation of command-line interaction.
+
+## Getting Help
+
+Most Linux commands include built-in documentation accessible through the manual system.
+
+<Note>
+Not every command has a manual page, but most system commands do.
+</Note>
+
+```shell
+# View manual page for a command
+man <command>
+
+# Quick help for many commands
+<command> --help
+
+# Search manual pages by keyword
+apropos <keyword>
+```
+
+## Directory Navigation & Listing
+
+### List Directory Contents
+
+```shell
+# Basic directory listing
+ls
+
+# Detailed list with permissions, size, and timestamps
+ls -l
+
+# Show all files including hidden ones (starting with .)
+ls -la
+
+# Human-readable file sizes
+ls -lh
+
+# Sort by modification time (newest first)
+ls -lt
+```
+
+### Change Directories
+
+```shell
+# Change to specific directory
+cd /path/to/directory
+
+# Go to home directory
+cd
+# or
+cd ~
+
+# Go up one directory level
+cd ..
+
+# Go to previous directory
+cd -
+
+# Show current working directory
+pwd
+```
+
+## File Content Viewing
+
+### Display File Contents
+
+```shell
+# Print entire file content to terminal
+cat filename
+
+# View file page by page (press q to quit)
+less filename
+
+# Show first 10 lines of file
+head filename
+
+# Show last 10 lines of file
+tail filename
+
+# Follow file changes in real-time (useful for logs)
+tail -f filename
+```
+
+### File and Directory Operations
+
+```shell
+# Create empty file
+touch filename
+
+# Create directory
+mkdir directory_name
+
+# Create nested directories
+mkdir -p path/to/nested/directory
+
+# Copy files
+cp source_file destination
+
+# Copy directories recursively
+cp -r source_directory destination_directory
+
+# Move/rename files or directories
+mv old_name new_name
+
+# Remove files
+rm filename
+
+# Remove directories and their contents
+rm -rf directory_name
+```
+
+## Shell Management
+
+### Viewing Available Shells
+
+```shell
+# List all available shells on the system
+cat /etc/shells
+
+# Check current shell
+echo $SHELL
+```
+
+### Changing Your Default Shell
+
+<Warning>
+Changing your shell affects your login environment. Make sure the new shell is properly installed and configured.
+</Warning>
+
+```shell
+# Change shell for current user
+chsh -s /path/to/new/shell
+
+# Change shell for specific user (requires sudo)
+sudo chsh -s /path/to/new/shell username
+
+# Example: Change to Fish shell
+chsh -s /usr/bin/fish
+```
+
+## System Information
+
+```shell
+# Display system information
+uname -a
+
+# Show disk usage
+df -h
+
+# Show directory size
+du -h /path/to/directory
+
+# Display memory usage
+free -h
+
+# Show running processes
+ps aux
+
+# Show system uptime
+uptime
+```

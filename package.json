@@ -1,0 +1,13 @@
+{
+  "name": "rasmus-docs",
+  "version": "1.0.0",
+  "description": "Rasmus - Platform/DevOps Engineer Documentation",
+  "scripts": {
+    "dev": "mint dev",
+    "build": "mint build",
+    "preview": "mint preview"
+  },
+  "devDependencies": {
+    "@mintlify/cli": "latest"
+  }
+}

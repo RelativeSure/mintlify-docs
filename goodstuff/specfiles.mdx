@@ -1,0 +1,19 @@
+---
+title: Spec files 
+description: Making of specfiles
+---
+
+## CMake
+Remember these lines when setting up cmake specfile
+```bash
+BuildRequires: cmake >= 3.19
+BuildRequires: cargo >= 1.40
+BuildRequires: rust >= 1.40
+
+%build
+%cmake
+%cmake_build
+
+%install
+%cmake_install
+```

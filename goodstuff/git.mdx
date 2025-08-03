@@ -1,0 +1,146 @@
+---
+title: Git
+description: Good Stuff for Git
+---
+
+I use Delta for my gitconfig
+
+```shell title=".gitconfig"
+# Column UI settings: configure how git displays output in columns for certain commands.
+# https://git-scm.com/docs/git-config#Documentation/git-config.txt-column
+[column]
+    # Automatically enable column display for some git commands
+    # https://git-scm.com/docs/git-config#Documentation/git-config.txt-columnui
+    ui = auto
+
+# Branch settings: control sorting and behavior of git branches.
+# https://git-scm.com/docs/git-config#Documentation/git-config.txt-branch
+[branch]
+    # Sort branches by most recent committer date (descending)
+    # https://git-scm.com/docs/git-config#Documentation/git-config.txt-branchsort
+    sort = -committerdate
+
+# Tag settings: control sorting and display of git tags.
+# https://git-scm.com/docs/git-config#Documentation/git-config.txt-tag
+[tag]
+    # Sort tags by version, then by refname
+    # https://git-scm.com/docs/git-config#Documentation/git-config.txt-tagsort
+    sort = version:refname
+
+# Diff settings: configure how git shows differences between commits and files.
+# https://git-scm.com/docs/git-config#Documentation/git-config.txt-diff
+[diff]
+    # Use the histogram diff algorithm for better performance
+    # https://git-scm.com/docs/git-config#Documentation/git-config.txt-diffalgorithm
+    algorithm = histogram
+    # Show moved code in plain color (not highlighted)
+    # https://git-scm.com/docs/git-config#Documentation/git-config.txt-diffcolorMoved
+    colorMoved = plain
+    # Use mnemonic prefixes in diff output
+    # https://git-scm.com/docs/git-config#Documentation/git-config.txt-diffmnemonicPrefix
+    mnemonicPrefix = true
+    # Detect renames in diffs
+    # https://git-scm.com/docs/git-config#Documentation/git-config.txt-diffrenames
+    renames = true
+
+# Push settings: control how git pushes changes to remotes.
+# https://git-scm.com/docs/git-config#Documentation/git-config.txt-push
+[push]
+    # Use 'simple' push behavior (current branch to same name)
+    # https://git-scm.com/docs/git-config#Documentation/git-config.txt-pushdefault
+    default = simple
+    # Automatically set up remote tracking on push
+    # https://git-scm.com/docs/git-config#Documentation/git-config.txt-pushautoSetupRemote
+    autoSetupRemote = true
+    # Push tags when pushing commits
+    # https://git-scm.com/docs/git-config#Documentation/git-config.txt-pushfollowTags
+    followTags = true
+
+# Fetch settings: control how git fetches changes from remotes.
+# https://git-scm.com/docs/git-config#Documentation/git-config.txt-fetch
+[fetch]
+    # Remove remote-tracking refs that no longer exist on remote
+    # https://git-scm.com/docs/git-config#Documentation/git-config.txt-fetchprune
+    prune = true
+    # Prune tags that no longer exist on remote
+    # https://git-scm.com/docs/git-config#Documentation/git-config.txt-fetchpruneTags
+    pruneTags = true
+    # Fetch all remotes by default
+    # https://git-scm.com/docs/git-config#Documentation/git-config.txt-fetchall
+    all = true
+
+# Help settings: configure help and command correction behavior.
+# https://git-scm.com/docs/git-config#Documentation/git-config.txt-help
+[help]
+    # Prompt before auto-correcting mistyped commands
+    # https://git-scm.com/docs/git-config#Documentation/git-config.txt-helpautocorrect
+    autocorrect = prompt
+
+# Commit settings: control commit message and diff display behavior.
+# https://git-scm.com/docs/git-config#Documentation/git-config.txt-commit
+[commit]
+    # Show diff of changes to be committed in commit message editor
+    # https://git-scm.com/docs/git-config#Documentation/git-config.txt-commitverbose
+    verbose = true
+
+# Rerere settings: enable and configure reuse of recorded conflict resolutions.
+# https://git-scm.com/docs/git-config#Documentation/git-config.txt-rerere
+[rerere]
+    # Enable reuse recorded resolution (rerere) for merge conflicts
+    # https://git-scm.com/docs/git-config#Documentation/git-config.txt-rerereenabled
+    enabled = true
+    # Automatically update rerere records after resolving conflicts
+    # https://git-scm.com/docs/git-config#Documentation/git-config.txt-rerereautoupdate
+    autoupdate = true
+
+# Rebase settings: control behavior of git rebase operations.
+# https://git-scm.com/docs/git-config#Documentation/git-config.txt-rebase
+[rebase]
+    # Automatically squash fixup/amend commits during rebase
+    # https://git-scm.com/docs/git-config#Documentation/git-config.txt-rebaseautoSquash
+    autoSquash = true
+    # Stash changes automatically before rebase and re-apply after
+    # https://git-scm.com/docs/git-config#Documentation/git-config.txt-rebaseautoStash
+    autoStash = true
+    # Update branch refs after rebase
+    # https://git-scm.com/docs/git-config#Documentation/git-config.txt-rebaseupdateRefs
+    updateRefs = true
+
+# Core settings: fundamental git behavior and system integration.
+# https://git-scm.com/docs/git-config#Documentation/git-config.txt-core
+[core]
+    # Use delta as the pager for all git output (improves diff display)
+    # https://git-scm.com/docs/git-config#Documentation/git-config.txt-corepager
+    pager = delta
+
+# Interactive settings: configure interactive commands like git add -p.
+# https://git-scm.com/docs/git-config#Documentation/git-config.txt-interactive
+[interactive]
+    # Use delta for interactive diffs, color only
+    # https://git-scm.com/docs/git-config#Documentation/git-config.txt-interactivediffFilter
+    diffFilter = delta --color-only
+
+# Delta settings: configure the delta diff viewer for git output.
+# https://dandavison.github.io/delta/
+[delta]
+    # Show diffs side-by-side in delta
+    # https://dandavison.github.io/delta/options.html#side-by-side
+    side-by-side = true
+    # Enable navigation in delta pager
+    # https://dandavison.github.io/delta/options.html#navigate
+    navigate = true
+    # Show line numbers in delta output
+    # https://dandavison.github.io/delta/options.html#line-numbers
+    line-numbers = true
+
+# Merge settings: control merge conflict style and resolution behavior.
+# https://git-scm.com/docs/git-config#Documentation/git-config.txt-merge
+[merge]
+    # Use zdiff3 style for merge conflict markers (improved context)
+    # https://git-scm.com/docs/git-config#Documentation/git-config.txt-mergeconflictstyle
+    conflictstyle = zdiff3
+```
+
+## sources
+
+https://blog.gitbutler.com/how-git-core-devs-configure-git/

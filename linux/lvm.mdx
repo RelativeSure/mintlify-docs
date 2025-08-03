@@ -1,0 +1,113 @@
+---
+title: Logical Volume Manager
+---
+
+## Common
+
+Check if LVM can access and manage system disks
+
+```shell showLineNumbers=false
+sudo lvmdiskscan
+```
+
+List physical volume(s)
+
+```shell showLineNumbers=false
+sudo pvs
+```
+
+List volume groups
+
+```shell showLineNumbers=false
+sudo vgs
+```
+
+Verify physical volume(s) was created successfully
+
+```shell showLineNumbers=false
+sudo pvdisplay /dev/<disk>
+```
+
+Verify the logical volume was created successfully
+
+```shell showLineNumbers=false
+sudo lvdisplay
+```
+
+````shell showLineNumbers=false
+
+## Physical
+
+Create physical volumes in LVM
+
+```shell showLineNumbers=false
+# example: sudo pv create /dev/sdb
+sudo pvcreate /dev/<disk>
+````
+
+## Volume
+
+Create volume group based on physical volumes
+
+```shell showLineNumbers=false
+# One physical disk in volume group
+sudo vgcreate VolumeGroup01 /dev/sdb
+
+# Multiple physical disks in same volume group
+sudo vgcreate VolumeGroup01 /dev/sdc /dev/sdd /dev/sde
+```
+
+## Logical
+
+Create logical volumes based on volume group
+
+```shell showLineNumbers=false
+# Allocate disk space for multiple volumes from same volume group
+sudo lvcreate -n repos -L 30G VolumeGroup01
+sudo lvcreate -n backup -L 50G VolumeGroup01
+sudo lvcreate -n dev -L 100G VolumeGroup01
+
+# Allocate rest of disk space
+sudo lvcreate -n disk01 -l 100%FREE VolumeGroup01
+```
+
+# Mount logical volumes
+
+1. **Format logical volumes and do it for all volumes**
+
+   ```shell
+   # example: sudo mkfs.ext4 /dev/VolumeGroup01/backup
+   sudo mkfs.ext4 /dev/<volume group>/<name of volume>
+   ```
+
+2. **Create folders (optional)**
+
+   ```shell
+   # example: sudo mkdir -p /mnt/backup
+   # example: sudo mkdir -p /opt/{repos,backup,dev}
+   sudo mkdir -p /<path>/<name of volume>
+   ```
+
+3. **Mount the disks**
+
+   ```shell
+   # example: sudo mount /dev/VolumeGroup01/backup /mnt/backup
+   # example: sudo mount /dev/VolumeGroup01/dev /opt/dev
+   sudo mount /dev/<volume group>/<name of volume> /<path>/<name of volume>
+
+   # Verify the mount was successful
+   df -h
+   # or
+   mount | grep <volume group>
+   ```
+
+4. **Add to fstab to permanently add the disks**
+
+   ```shell
+   # use your editor of choice (nano, vi, vim, etc.)
+   sudo vim /etc/fstab
+
+   # Add the following
+   # example: /dev/VolumeGroup01/backup /mnt/backup ext4 defaults,nofail 0 0
+   /dev/<volume group>/<name of volume> /<path>/<name of volume> ext4 defaults,nofail 0 0
+   ```

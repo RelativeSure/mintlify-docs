@@ -1,0 +1,164 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "mint",
+  "name": "Rasmus - Platform/DevOps Engineer",
+  "colors": {
+    "primary": "#ff0000"
+  },
+  "navigation": {
+    "dropdowns": [
+      {
+        "dropdown": "About",
+        "icon": "user",
+        "description": "About Rasmus - Platform/DevOps Engineer",
+        "groups": [
+          {
+            "group": "Introduction",
+            "pages": [
+              "index"
+            ]
+          }
+        ]
+      },
+      {
+        "dropdown": "Bookmarks",
+        "icon": "bookmark",
+        "description": "Curated links and resources organized by category",
+        "groups": [
+          {
+            "group": "Technology & Development",
+            "pages": [
+              "bookmarks/tech",
+              "bookmarks/developer",
+              "bookmarks/ai",
+              "bookmarks/http"
+            ]
+          },
+          {
+            "group": "Infrastructure & Security",
+            "pages": [
+              "bookmarks/linux",
+              "bookmarks/kubernetes",
+              "bookmarks/security"
+            ]
+          },
+          {
+            "group": "Platform Specific",
+            "pages": [
+              "bookmarks/windows",
+              "bookmarks/discord"
+            ]
+          },
+          {
+            "group": "Personal & Lifestyle",
+            "pages": [
+              "bookmarks/games",
+              "bookmarks/health",
+              "bookmarks/miscellaneous"
+            ]
+          }
+        ]
+      },
+      {
+        "dropdown": "Good Stuff",
+        "icon": "star",
+        "description": "Useful tools, tips, and configurations",
+        "groups": [
+          {
+            "group": "Development Tools",
+            "pages": [
+              "goodstuff/index",
+              "goodstuff/git",
+              "goodstuff/nodejs",
+              "goodstuff/vscode"
+            ]
+          },
+          {
+            "group": "Infrastructure & DevOps",
+            "pages": [
+              "goodstuff/helm",
+              "goodstuff/specfiles"
+            ]
+          }
+        ]
+      },
+      {
+        "dropdown": "Linux",
+        "icon": "terminal",
+        "description": "Linux administration, configuration, and automation",
+        "groups": [
+          {
+            "group": "Fundamentals",
+            "pages": [
+              "linux/basic",
+              "linux/aliases",
+              "linux/sources"
+            ]
+          },
+          {
+            "group": "System Administration",
+            "pages": [
+              "linux/ubuntu",
+              "linux/lvm",
+              "linux/requirements"
+            ]
+          },
+          {
+            "group": "Automation & Configuration",
+            "pages": [
+              "linux/ansible",
+              "linux/puppet"
+            ]
+          },
+          {
+            "group": "Shell & Tools",
+            "pages": [
+              "linux/fish"
+            ]
+          }
+        ]
+      },
+      {
+        "dropdown": "Windows",
+        "icon": "windows",
+        "description": "Windows administration and PowerShell",
+        "groups": [
+          {
+            "group": "Administration",
+            "pages": [
+              "windows/powershell",
+              "windows/wsl"
+            ]
+          }
+        ]
+      },
+      {
+        "dropdown": "Projects",
+        "icon": "code",
+        "description": "Personal projects and work-in-progress items",
+        "groups": [
+          {
+            "group": "Active Projects",
+            "pages": [
+              "projects/work-in-progress",
+              "projects/autocopr"
+            ]
+          }
+        ]
+      },
+      {
+        "dropdown": "Website",
+        "icon": "globe",
+        "description": "Information about this website",
+        "groups": [
+          {
+            "group": "Documentation",
+            "pages": [
+              "website/website"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

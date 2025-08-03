@@ -1,0 +1,138 @@
+---
+title: AutoCOPR
+description: Automated COPR repository for packaging open-source development tools
+---
+
+## Project Overview
+
+AutoCOPR is an automated system that maintains a COPR (Fedora Community Projects) repository for personal and professional use. The project automatically tracks GitHub releases and updates package specifications for various development and system administration tools.
+
+<Warning>
+This is a personal project that may be abandoned at any point. Use at your own discretion.
+</Warning>
+
+## What It Does
+
+- **Automated Monitoring**: Checks GitHub releases daily for new versions of tracked projects
+- **Package Management**: Automatically updates spec files for COPR package builds
+- **Build Automation**: Triggers COPR builds when new versions are detected
+- **Status Tracking**: Provides build status badges for monitoring package health
+
+## Supported Packages
+
+The repository includes spec files and automated builds for various categories of tools:
+
+### Development Tools
+- **act-cli**: Run GitHub Actions locally
+- **lazygit**: Terminal UI for git commands
+- **fish**: User-friendly command line shell
+- **starship**: Cross-shell prompt customization
+
+### System Utilities
+- **bottom**: Cross-platform system monitor
+- **atuin**: Shell history replacement with sync
+- **chezmoi**: Dotfiles manager
+- **zellij**: Terminal multiplexer
+
+### And Many More
+The repository continuously expands to include useful open-source tools for development and system administration.
+
+## Features
+
+<CardGroup cols={2}>
+  <Card title="Daily Automation" icon="clock">
+    Automatically checks for new releases and updates packages daily
+  </Card>
+  <Card title="Build Status" icon="check-circle">
+    Each package includes build status badges for monitoring
+  </Card>
+  <Card title="Spec File Management" icon="file-code">
+    Maintains and updates RPM spec files automatically
+  </Card>
+  <Card title="Wide Tool Support" icon="tools">
+    Covers development, system administration, and productivity tools
+  </Card>
+</CardGroup>
+
+## Technology Stack
+
+- **GitHub Actions**: For automation and CI/CD
+- **COPR**: Fedora's community build system
+- **RPM Packaging**: Standard package format for Red Hat-based distributions
+- **GitHub API**: For monitoring releases
+
+## Usage
+
+### Adding the Repository
+
+```bash
+# Enable the COPR repository
+sudo dnf copr enable RelativeSure/autocopr
+
+# Install packages
+sudo dnf install <package-name>
+```
+
+### Available Commands
+
+```bash
+# Search for available packages
+dnf search --enablerepo="*RelativeSure*" <search-term>
+
+# List all packages from the repository
+dnf repository-packages copr:copr.fedorainfracloud.org:RelativeSure:autocopr list
+```
+
+## Development
+
+### Contributing
+
+While this is primarily a personal project, contributions are welcome:
+
+1. Fork the repository
+2. Add or update spec files
+3. Test builds locally
+4. Submit pull requests
+
+### Local Development
+
+```bash
+# Clone the repository
+git clone https://github.com/RelativeSure/autocopr.git
+
+# Navigate to project directory
+cd autocopr
+
+# Review spec files in the specs/ directory
+ls specs/
+```
+
+## Resources
+
+<CardGroup cols={2}>
+  <Card title="GitHub Repository" href="https://github.com/RelativeSure/autocopr" icon="github">
+    Source code and project management
+  </Card>
+  <Card title="RPM Packaging Guide" href="http://ftp.rpm.org/max-rpm/s1-rpm-inside-macros.html" icon="book">
+    Learn about RPM spec file macros and packaging
+  </Card>
+  <Card title="COPR Documentation" href="https://docs.pagure.org/copr.copr/user_documentation.html" icon="book">
+    Official COPR build system documentation
+  </Card>
+  <Card title="Fedora Packaging Guidelines" href="https://docs.fedoraproject.org/en-US/packaging-guidelines/" icon="book">
+    Best practices for Fedora package creation
+  </Card>
+</CardGroup>
+
+## Project Status
+
+This project is actively maintained but comes with no guarantees. It serves as a personal learning project for:
+
+- RPM packaging
+- COPR build system
+- GitHub Actions automation
+- Package repository management
+
+<Note>
+Users should be prepared for potential service interruptions or project discontinuation.
+</Note>

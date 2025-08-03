@@ -1,0 +1,154 @@
+---
+title: Aliases
+description: Aliases to use on Linux
+---
+
+## Common
+
+These aliases work across most shells and provide useful shortcuts for common commands.
+
+```shell
+# Directory listing
+alias ll='ls -l'
+alias la='ls -la'
+alias l='ls -CF'
+
+# Navigation
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+
+# Safety aliases
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+
+# System information
+alias df='df -h'
+alias du='du -h'
+alias free='free -h'
+
+# Process management
+alias ps='ps aux'
+alias psg='ps aux | grep'
+
+# Network
+alias ports='netstat -tulanp'
+```
+
+## Bash
+
+Bash-specific aliases and functions. Add these to your `~/.bashrc` file.
+
+```bash
+# Git shortcuts
+alias gs='git status'
+alias ga='git add'
+alias gc='git commit'
+alias gp='git push'
+alias gl='git log --oneline'
+alias gd='git diff'
+
+# Docker shortcuts
+alias dps='docker ps'
+alias dpa='docker ps -a'
+alias di='docker images'
+alias dc='docker-compose'
+
+# System updates (Debian/Ubuntu)
+alias update='sudo apt update && sudo apt upgrade'
+alias install='sudo apt install'
+alias search='apt search'
+
+# Quick file editing
+alias bashrc='nano ~/.bashrc'
+alias vimrc='nano ~/.vimrc'
+
+# History with timestamps
+alias h='history'
+alias hg='history | grep'
+
+# Make directories and navigate
+mkcd() {
+    mkdir -p "$1" && cd "$1"
+}
+
+# Extract various archive formats
+extract() {
+    if [ -f $1 ] ; then
+        case $1 in
+            *.tar.bz2)   tar xjf $1     ;;
+            *.tar.gz)    tar xzf $1     ;;
+            *.bz2)       bunzip2 $1     ;;
+            *.rar)       unrar e $1     ;;
+            *.gz)        gunzip $1      ;;
+            *.tar)       tar xf $1      ;;
+            *.tbz2)      tar xjf $1     ;;
+            *.tgz)       tar xzf $1     ;;
+            *.zip)       unzip $1       ;;
+            *.Z)         uncompress $1  ;;
+            *.7z)        7z x $1        ;;
+            *)     echo "'$1' cannot be extracted via extract()" ;;
+        esac
+    else
+        echo "'$1' is not a valid file"
+    fi
+}
+```
+
+## Fish
+
+Fish shell specific aliases and functions. Add these to your `~/.config/fish/config.fish` file.
+
+```fish
+# Git shortcuts
+alias gs 'git status'
+alias ga 'git add'
+alias gc 'git commit'
+alias gp 'git push'
+alias gl 'git log --oneline'
+alias gd 'git diff'
+
+# Docker shortcuts
+alias dps 'docker ps'
+alias dpa 'docker ps -a'
+alias di 'docker images'
+alias dc 'docker-compose'
+
+# System shortcuts
+alias ll 'ls -l'
+alias la 'ls -la'
+alias l 'ls -CF'
+
+# Navigation
+alias .. 'cd ..'
+alias ... 'cd ../..'
+alias .... 'cd ../../..'
+
+# System information
+alias df 'df -h'
+alias du 'du -h'
+alias free 'free -h'
+
+# Make directory and navigate
+function mkcd
+    mkdir -p $argv[1]; and cd $argv[1]
+end
+
+# Quick file editing
+alias fishconfig 'nano ~/.config/fish/config.fish'
+
+# Process management
+alias psg 'ps aux | grep'
+
+# Network
+alias ports 'netstat -tulanp'
+
+# Safety (Fish has built-in confirmations, but these can be helpful)
+alias rm 'rm -i'
+alias cp 'cp -i'
+alias mv 'mv -i'
+
+# Reload Fish configuration
+alias reload 'source ~/.config/fish/config.fish'
+```
