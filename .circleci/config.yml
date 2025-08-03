@@ -7,5 +7,6 @@ workflows:
   run-megalinter:
     jobs:
       - megalinter/run:
+          flavor: cupcake
           context:
             - "Main Context"
