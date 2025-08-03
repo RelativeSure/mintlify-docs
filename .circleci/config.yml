@@ -7,6 +7,5 @@ workflows:
   run-megalinter:
     jobs:
       - megalinter/run:
-          resource_class: kubearchitect/hetzner-ubuntu-kind
           context:
-            - main-context
+            - "Main Context"
