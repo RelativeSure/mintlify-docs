@@ -2,10 +2,9 @@ import fs from 'fs/promises';
 import path from 'path';
 
 const DOCS_JSON_PATH = path.resolve(process.cwd(), 'docs.json');
-const TARGET_DIRECTORIES = new Set();
-const EXCLUDED_DIRECTORIES = ['about']; // Add any directories to exclude here
+const ROOT_DIRECTORIES = new Set();
 
-async function getDirectoriesFromDocsJson() {
+async function getRootDirectoriesFromDocsJson() {
   try {
     const docsJsonContent = await fs.readFile(DOCS_JSON_PATH, 'utf-8');
     const docsJson = JSON.parse(docsJsonContent);
@@ -16,15 +15,10 @@ async function getDirectoriesFromDocsJson() {
       for (const group of groups) {
         const pages = group.pages || [];
         for (const page of pages) {
-          const dir = path.dirname(page);
-          if (dir !== '.' && !dir.startsWith('http')) {
-            TARGET_DIRECTORIES.add(dir);
-            let parentDir = dir;
-            while (parentDir !== '.') {
-              parentDir = path.dirname(parentDir);
-              if (parentDir !== '.') {
-                TARGET_DIRECTORIES.add(parentDir);
-              }
+          if (page && !page.startsWith('http')) {
+            const parts = page.split('/');
+            if (parts.length > 1) {
+              ROOT_DIRECTORIES.add(parts[0]);
             }
           }
         }
@@ -47,7 +41,7 @@ async function getTitleFromMdx(filePath) {
       }
     }
   } catch (error) {
-    // Could be a directory, or file without title. That's fine.
+    // Fine if it fails, we'll use the formatted name.
   }
   return null;
 }
@@ -61,78 +55,102 @@ function formatNameToTitle(name) {
     .join(' ');
 }
 
-async function generateIndexPage(dir) {
-  const indexPath = path.join(dir, 'index.mdx');
+async function buildDirectoryTree(dir) {
   const entries = await fs.readdir(dir, { withFileTypes: true });
+  const tree = [];
 
-  const cards = await Promise.all(
-    entries
-      .filter(entry => {
-        const isIndex = entry.name === 'index.mdx';
-        const isHidden = entry.name.startsWith('.');
-        return !isIndex && !isHidden;
-      })
-      .map(async entry => {
-        const entryPath = path.join(dir, entry.name);
-        const href = `/${path.join(dir, entry.name).replace(/\.mdx$/, '')}`;
-        let title = await getTitleFromMdx(entryPath);
-        if (!title) {
-          title = formatNameToTitle(entry.name);
-        }
-        const icon = entry.isDirectory() ? 'folder' : 'file-text';
-        return `<Card title="${title}" icon="${icon}" href="${href}"></Card>`;
-      })
-  );
+  for (const entry of entries) {
+    if (entry.name.startsWith('.') || entry.name === 'index.mdx') {
+      continue;
+    }
 
-  if (cards.length === 0) {
-    console.log(`No items to index in ${dir}, skipping.`);
-    return;
-  }
-
-  const mdxContent = `---
-title: 'Overview of ${formatNameToTitle(path.basename(dir))}'
----
-
-import { Card, Columns } from 'mintlify';
-
-<Columns>
-  ${cards.join('\n  ')}
-</Columns>
-`;
-
-  await fs.writeFile(indexPath, mdxContent);
-  console.log(`Generated index page for ${dir}`);
-}
-
-async function cleanupExcludedDirectories() {
-  for (const dir of EXCLUDED_DIRECTORIES) {
-    const indexPath = path.join(dir, 'index.mdx');
-    try {
-      await fs.unlink(indexPath);
-      console.log(`Removed index page from excluded directory: ${dir}`);
-    } catch (error) {
-      if (error.code !== 'ENOENT') {
-        console.error(`Error removing index page from ${dir}:`, error);
-      }
+    const entryPath = path.join(dir, entry.name);
+    if (entry.isDirectory()) {
+      tree.push({
+        type: 'directory',
+        name: entry.name,
+        path: entryPath,
+        children: await buildDirectoryTree(entryPath),
+      });
+    } else if (entry.name.endsWith('.mdx')) {
+      const title = await getTitleFromMdx(entryPath) || formatNameToTitle(entry.name);
+      tree.push({
+        type: 'file',
+        name: entry.name,
+        path: entryPath,
+        title: title,
+      });
     }
   }
+  return tree;
 }
+
+function generateMdxForTree(tree, level = 0) {
+  let mdx = '';
+  for (const node of tree) {
+    const href = `/${node.path.replace(/\.mdx$/, '')}`;
+    if (node.type === 'directory') {
+      const title = formatNameToTitle(node.name);
+      mdx += `<Accordion title="${title}" icon="folder">\n`;
+      mdx += generateMdxForTree(node.children, level + 1);
+      mdx += `</Accordion>\n`;
+    } else {
+      mdx += `<Card title="${node.title}" icon="file-text" href="${href}"></Card>\n`;
+    }
+  }
+  return mdx;
+}
+
+async function cleanupOldIndexFiles(dir) {
+    const entries = await fs.readdir(dir, { withFileTypes: true });
+    for (const entry of entries) {
+        const entryPath = path.join(dir, entry.name);
+        if (entry.isDirectory()) {
+            await cleanupOldIndexFiles(entryPath);
+        } else if (entry.name === 'index.mdx' && dir !== '.') {
+            // Don't delete the root index files we are about to create.
+            // This is a simple check, we can make it more robust if needed.
+            const isRootIndex = Array.from(ROOT_DIRECTORIES).some(rootDir => path.resolve(rootDir) === path.resolve(dir));
+            if (!isRootIndex) {
+                 try {
+                    await fs.unlink(entryPath);
+                    console.log(`Removed old index file: ${entryPath}`);
+                } catch (error) {
+                    console.error(`Error removing old index file ${entryPath}:`, error);
+                }
+            }
+        }
+    }
+}
+
 
 async function main() {
-  await getDirectoriesFromDocsJson();
-  await cleanupExcludedDirectories();
+  await getRootDirectoriesFromDocsJson();
 
-  const finalTargetDirectories = Array.from(TARGET_DIRECTORIES).filter(
-    dir => !EXCLUDED_DIRECTORIES.includes(dir)
-  );
+  // Clean up all old index files first
+  for (const dir of ROOT_DIRECTORIES) {
+      await cleanupOldIndexFiles(dir);
+  }
 
-  console.log('Generating index pages for:', finalTargetDirectories);
-  for (const dir of finalTargetDirectories) {
-    try {
-      await generateIndexPage(dir);
-    } catch (error) {
-      console.error(`Failed to generate index for ${dir}:`, error);
-    }
+
+  console.log('Generating overview pages for:', Array.from(ROOT_DIRECTORIES));
+
+  for (const dir of ROOT_DIRECTORIES) {
+    const tree = await buildDirectoryTree(dir);
+    const mdxContent = generateMdxForTree(tree);
+    const indexPath = path.join(dir, 'index.mdx');
+
+    const finalMdx = `---
+title: 'Overview of ${formatNameToTitle(dir)}'
+---
+
+import { Accordion, Card } from 'mintlify';
+
+${mdxContent}
+`;
+
+    await fs.writeFile(indexPath, finalMdx);
+    console.log(`Generated overview page for ${dir}`);
   }
 }
 

@@ -2,10 +2,26 @@
 title: 'Overview of Infrastructure'
 ---
 
-import { Card, Columns } from 'mintlify';
+import { Accordion, Card } from 'mintlify';
 
-<Columns>
-  <Card title="Containers" icon="folder" href="/infrastructure/containers"></Card>
-  <Card title="Linux" icon="folder" href="/infrastructure/linux"></Card>
-  <Card title="Windows" icon="folder" href="/infrastructure/windows"></Card>
-</Columns>
+<Accordion title="Containers" icon="folder">
+<Card title="Helm" icon="file-text" href="/infrastructure/containers/helm"></Card>
+<Card title="Kubernetes Resources" icon="file-text" href="/infrastructure/containers/kubernetes"></Card>
+</Accordion>
+<Accordion title="Linux" icon="folder">
+<Card title="Fish Shell" icon="file-text" href="/infrastructure/linux/automation-fish"></Card>
+<Card title="Puppet" icon="file-text" href="/infrastructure/linux/automation-puppet"></Card>
+<Card title="Ansible" icon="file-text" href="/infrastructure/linux/automation"></Card>
+<Card title="Aliases" icon="file-text" href="/infrastructure/linux/fundamentals-aliases"></Card>
+<Card title="Sites" icon="file-text" href="/infrastructure/linux/fundamentals-sources"></Card>
+<Card title="Basic Linux Commands" icon="file-text" href="/infrastructure/linux/fundamentals"></Card>
+<Card title="Linux Systems Overview" icon="file-text" href="/infrastructure/linux/overview"></Card>
+<Card title="Logical Volume Manager" icon="file-text" href="/infrastructure/linux/system-admin-lvm"></Card>
+<Card title="Requirements" icon="file-text" href="/infrastructure/linux/system-admin-requirements"></Card>
+<Card title="Ubuntu" icon="file-text" href="/infrastructure/linux/system-admin"></Card>
+</Accordion>
+<Accordion title="Windows" icon="folder">
+<Card title="Windows Administration Overview" icon="file-text" href="/infrastructure/windows/overview"></Card>
+<Card title="PowerShell" icon="file-text" href="/infrastructure/windows/powershell"></Card>
+<Card title="WSL" icon="file-text" href="/infrastructure/windows/wsl"></Card>
+</Accordion>

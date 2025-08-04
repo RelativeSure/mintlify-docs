@@ -18,6 +18,7 @@
           {
             "group": "Introduction",
             "pages": [
+              "about/index",
               "about/introduction"
             ]
           }
@@ -37,7 +38,6 @@
           {
             "group": "Linux Systems",
             "pages": [
-              "infrastructure/linux/index",
               "infrastructure/linux/overview",
               "infrastructure/linux/fundamentals",
               "infrastructure/linux/system-admin",
@@ -47,7 +47,6 @@
           {
             "group": "Windows Administration",
             "pages": [
-              "infrastructure/windows/index",
               "infrastructure/windows/overview",
               "infrastructure/windows/powershell",
               "infrastructure/windows/wsl"
@@ -56,7 +55,6 @@
           {
             "group": "Container Orchestration",
             "pages": [
-              "infrastructure/containers/index",
               "infrastructure/containers/kubernetes",
               "infrastructure/containers/helm"
             ]
@@ -77,7 +75,6 @@
           {
             "group": "Development Tools",
             "pages": [
-              "tools/development/index",
               "tools/development/overview",
               "tools/development/git",
               "tools/development/vscode",
@@ -87,7 +84,6 @@
           {
             "group": "DevOps Utilities", 
             "pages": [
-              "tools/devops/index",
               "tools/devops/specfiles",
               "tools/devops/automation"
             ]
