@@ -3,6 +3,7 @@ import path from 'path';
 
 const DOCS_JSON_PATH = path.resolve(process.cwd(), 'docs.json');
 const TARGET_DIRECTORIES = new Set();
+const EXCLUDED_DIRECTORIES = ['about']; // Add any directories to exclude here
 
 async function getDirectoriesFromDocsJson() {
   try {
@@ -103,10 +104,30 @@ import { Card, Columns } from 'mintlify';
   console.log(`Generated index page for ${dir}`);
 }
 
+async function cleanupExcludedDirectories() {
+  for (const dir of EXCLUDED_DIRECTORIES) {
+    const indexPath = path.join(dir, 'index.mdx');
+    try {
+      await fs.unlink(indexPath);
+      console.log(`Removed index page from excluded directory: ${dir}`);
+    } catch (error) {
+      if (error.code !== 'ENOENT') {
+        console.error(`Error removing index page from ${dir}:`, error);
+      }
+    }
+  }
+}
+
 async function main() {
   await getDirectoriesFromDocsJson();
-  console.log('Generating index pages for:', Array.from(TARGET_DIRECTORIES));
-  for (const dir of TARGET_DIRECTORIES) {
+  await cleanupExcludedDirectories();
+
+  const finalTargetDirectories = Array.from(TARGET_DIRECTORIES).filter(
+    dir => !EXCLUDED_DIRECTORIES.includes(dir)
+  );
+
+  console.log('Generating index pages for:', finalTargetDirectories);
+  for (const dir of finalTargetDirectories) {
     try {
       await generateIndexPage(dir);
     } catch (error) {
