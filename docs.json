@@ -29,6 +29,12 @@
         "description": "Infrastructure, automation, and platform engineering guides",
         "groups": [
           {
+            "group": "Overview",
+            "pages": [
+              "infrastructure/index"
+            ]
+          },
+          {
             "group": "Linux Systems",
             "pages": [
               "infrastructure/linux/overview",
@@ -60,6 +66,12 @@
         "description": "Curated tools, configurations, and useful resources",
         "groups": [
           {
+            "group": "Overview",
+            "pages": [
+              "tools/index"
+            ]
+          },
+          {
             "group": "Development Tools",
             "pages": [
               "tools/development/overview",
@@ -82,6 +94,12 @@
         "icon": "book-open",
         "description": "Organized bookmarks and reference materials",
         "groups": [
+          {
+            "group": "Overview",
+            "pages": [
+              "knowledge/index"
+            ]
+          },
           {
             "group": "Technology & Development",
             "pages": [
@@ -117,6 +135,7 @@
           {
             "group": "Active Development",
             "pages": [
+              "projects/index",
               "projects/overview",
               "projects/autocopr",
               "projects/work-in-progress"
@@ -132,6 +151,7 @@
           {
             "group": "Documentation Site",
             "pages": [
+              "meta/index",
               "meta/about-docs-site"
             ]
           }
