@@ -18,6 +18,7 @@
           {
             "group": "Introduction",
             "pages": [
+              "about/index",
               "about/introduction"
             ]
           }
@@ -29,8 +30,15 @@
         "description": "Infrastructure, automation, and platform engineering guides",
         "groups": [
           {
+            "group": "Overview",
+            "pages": [
+              "infrastructure/index"
+            ]
+          },
+          {
             "group": "Linux Systems",
             "pages": [
+              "infrastructure/linux/index",
               "infrastructure/linux/overview",
               "infrastructure/linux/fundamentals",
               "infrastructure/linux/system-admin",
@@ -40,6 +48,7 @@
           {
             "group": "Windows Administration",
             "pages": [
+              "infrastructure/windows/index",
               "infrastructure/windows/overview",
               "infrastructure/windows/powershell",
               "infrastructure/windows/wsl"
@@ -48,6 +57,7 @@
           {
             "group": "Container Orchestration",
             "pages": [
+              "infrastructure/containers/index",
               "infrastructure/containers/kubernetes",
               "infrastructure/containers/helm"
             ]
@@ -60,8 +70,15 @@
         "description": "Curated tools, configurations, and useful resources",
         "groups": [
           {
+            "group": "Overview",
+            "pages": [
+              "tools/index"
+            ]
+          },
+          {
             "group": "Development Tools",
             "pages": [
+              "tools/development/index",
               "tools/development/overview",
               "tools/development/git",
               "tools/development/vscode",
@@ -71,6 +88,7 @@
           {
             "group": "DevOps Utilities", 
             "pages": [
+              "tools/devops/index",
               "tools/devops/specfiles",
               "tools/devops/automation"
             ]
@@ -82,6 +100,12 @@
         "icon": "book-open",
         "description": "Organized bookmarks and reference materials",
         "groups": [
+          {
+            "group": "Overview",
+            "pages": [
+              "knowledge/index"
+            ]
+          },
           {
             "group": "Technology & Development",
             "pages": [
@@ -117,6 +141,7 @@
           {
             "group": "Active Development",
             "pages": [
+              "projects/index",
               "projects/overview",
               "projects/autocopr",
               "projects/work-in-progress"
@@ -132,6 +157,7 @@
           {
             "group": "Documentation Site",
             "pages": [
+              "meta/index",
               "meta/about-docs-site"
             ]
           }
