@@ -3,6 +3,7 @@ import path from 'path';
 
 const DOCS_JSON_PATH = path.resolve(process.cwd(), 'docs.json');
 const ROOT_DIRECTORIES = new Set();
+const EXCLUDED_ROOT_DIRECTORIES = ['about']; // Add any root directories to exclude here
 
 async function getRootDirectoriesFromDocsJson() {
   try {
@@ -108,8 +109,6 @@ async function cleanupOldIndexFiles(dir) {
         if (entry.isDirectory()) {
             await cleanupOldIndexFiles(entryPath);
         } else if (entry.name === 'index.mdx' && dir !== '.') {
-            // Don't delete the root index files we are about to create.
-            // This is a simple check, we can make it more robust if needed.
             const isRootIndex = Array.from(ROOT_DIRECTORIES).some(rootDir => path.resolve(rootDir) === path.resolve(dir));
             if (!isRootIndex) {
                  try {
@@ -123,19 +122,37 @@ async function cleanupOldIndexFiles(dir) {
     }
 }
 
+async function cleanupExcludedRootDirectories() {
+    for (const dir of EXCLUDED_ROOT_DIRECTORIES) {
+        const indexPath = path.join(dir, 'index.mdx');
+        try {
+            await fs.unlink(indexPath);
+            console.log(`Removed index page from excluded root directory: ${dir}`);
+        } catch (error) {
+            if (error.code !== 'ENOENT') {
+                console.error(`Error removing index page from ${dir}:`, error);
+            }
+        }
+    }
+}
+
 
 async function main() {
   await getRootDirectoriesFromDocsJson();
 
-  // Clean up all old index files first
   for (const dir of ROOT_DIRECTORIES) {
       await cleanupOldIndexFiles(dir);
   }
 
+  await cleanupExcludedRootDirectories();
 
-  console.log('Generating overview pages for:', Array.from(ROOT_DIRECTORIES));
+  const finalTargetDirectories = Array.from(ROOT_DIRECTORIES).filter(
+    dir => !EXCLUDED_ROOT_DIRECTORIES.includes(dir)
+  );
 
-  for (const dir of ROOT_DIRECTORIES) {
+  console.log('Generating overview pages for:', finalTargetDirectories);
+
+  for (const dir of finalTargetDirectories) {
     const tree = await buildDirectoryTree(dir);
     const mdxContent = generateMdxForTree(tree);
     const indexPath = path.join(dir, 'index.mdx');
