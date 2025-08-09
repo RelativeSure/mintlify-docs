@@ -9,11 +9,23 @@ on: # yamllint disable-line rule:truthy - false positive
   # Comment this line to trigger action only on pull-requests
   # (not recommended if you don't pay for GH Actions)
   push:
+    branches:
+      - main
+      - master
 
   pull_request:
     branches:
       - main
       - master
+
+  # Allow manual triggering of the workflow
+  workflow_dispatch:
+    inputs:
+      validate_all_codebase:
+        description: 'Validate entire codebase'
+        required: false
+        default: 'false'
+        type: boolean
 
 # Comment env block if you do not want to apply fixes
 env:
@@ -41,6 +53,11 @@ jobs:
   megalinter:
     name: MegaLinter
     runs-on: ubuntu-latest
+    timeout-minutes: 30  # Prevent hanging jobs
+
+    # Add environment protection for production deployments
+    environment: 
+      name: ${{ github.ref == 'refs/heads/main' && 'production' || 'development' }}
 
     # Give the default GITHUB_TOKEN write permission to commit and push, comment
     # issues & post new PR; remove the ones you do not need
@@ -48,7 +65,9 @@ jobs:
       contents: write
       issues: write
       pull-requests: write
-      workflows: write
+      actions: write
+      security-events: write
+      statuses: write
 
     steps:
       # Git Checkout
@@ -60,6 +79,17 @@ jobs:
           # If you use VALIDATE_ALL_CODEBASE = true, you can remove this line to
           # improve performance
           fetch-depth: 0
+
+      # Cache MegaLinter Docker images and dependencies
+      - name: Cache MegaLinter
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/megalinter
+            /tmp/megalinter-cache
+          key: ${{ runner.os }}-megalinter-${{ hashFiles('**/.mega-linter.yml', '**/megalinter.yml') }}
+          restore-keys: |
+            ${{ runner.os }}-megalinter-
 
       # MegaLinter
       - name: MegaLinter
@@ -109,6 +139,46 @@ jobs:
           path: |
             megalinter-reports
             mega-linter.log
+
+      # Upload SARIF results to GitHub Security tab
+      - name: Upload SARIF results
+        if: always()
+        uses: github/codeql-action/upload-sarif@e8893c57a1f3a2b659b6b55564fdfdbbd2982911 # v3.24.0
+        with:
+          sarif_file: megalinter-reports/megalinter-report.sarif
+        continue-on-error: true
+
+      # Create comprehensive job summary
+      - name: Add job summary
+        if: always()
+        run: |
+          {
+            echo "## 🔍 MegaLinter Results"
+            echo ""
+      
+            if [ -f megalinter-reports/megalinter-report.json ]; then
+              echo "### 📊 Statistics"
+              echo "- **Workflow**: ${{ github.workflow }}"
+              echo "- **Trigger**: ${{ github.event_name }}"
+              echo "- **Branch**: ${{ github.ref_name }}"
+              echo "- **Commit**: ${{ github.sha }}"
+              echo ""
+      
+              # Extract key metrics if available
+              if command -v jq &> /dev/null; then
+                TOTAL_FILES=$(jq -r '.summary.total_files // "N/A"' megalinter-reports/megalinter-report.json)
+                TOTAL_ERRORS=$(jq -r '.summary.total_errors // "N/A"' megalinter-reports/megalinter-report.json)
+                echo "- **Files processed**: ${TOTAL_FILES}"
+                echo "- **Total errors**: ${TOTAL_ERRORS}"
+              fi
+            fi
+      
+            echo ""
+            echo "### 🔗 Links"
+            echo "- [View detailed report](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})"
+            echo "- [Download artifacts](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}#artifacts)"
+          } >> "$GITHUB_STEP_SUMMARY"
+
 
       # Set APPLY_FIXES_IF var for use in future steps
       - name: Set APPLY_FIXES_IF var
