@@ -67,6 +67,7 @@ jobs:
       pull-requests: write
       actions: write
       security-events: write
+      statuses: write
 
     steps:
       # Git Checkout
@@ -151,30 +152,33 @@ jobs:
       - name: Add job summary
         if: always()
         run: |
-          echo "## 🔍 MegaLinter Results" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-
-          if [ -f megalinter-reports/megalinter-report.json ]; then
-            echo "### 📊 Statistics" >> $GITHUB_STEP_SUMMARY
-            echo "- **Workflow**: ${{ github.workflow }}" >> $GITHUB_STEP_SUMMARY
-            echo "- **Trigger**: ${{ github.event_name }}" >> $GITHUB_STEP_SUMMARY
-            echo "- **Branch**: ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
-            echo "- **Commit**: ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
-            echo "" >> $GITHUB_STEP_SUMMARY
-
-            # Extract key metrics if available
-            if command -v jq &> /dev/null; then
-              TOTAL_FILES=$(jq -r '.summary.total_files // "N/A"' megalinter-reports/megalinter-report.json)
-              TOTAL_ERRORS=$(jq -r '.summary.total_errors // "N/A"' megalinter-reports/megalinter-report.json)
-              echo "- **Files processed**: $TOTAL_FILES" >> $GITHUB_STEP_SUMMARY
-              echo "- **Total errors**: $TOTAL_ERRORS" >> $GITHUB_STEP_SUMMARY
+          {
+            echo "## 🔍 MegaLinter Results"
+            echo ""
+      
+            if [ -f megalinter-reports/megalinter-report.json ]; then
+              echo "### 📊 Statistics"
+              echo "- **Workflow**: ${{ github.workflow }}"
+              echo "- **Trigger**: ${{ github.event_name }}"
+              echo "- **Branch**: ${{ github.ref_name }}"
+              echo "- **Commit**: ${{ github.sha }}"
+              echo ""
+      
+              # Extract key metrics if available
+              if command -v jq &> /dev/null; then
+                TOTAL_FILES=$(jq -r '.summary.total_files // "N/A"' megalinter-reports/megalinter-report.json)
+                TOTAL_ERRORS=$(jq -r '.summary.total_errors // "N/A"' megalinter-reports/megalinter-report.json)
+                echo "- **Files processed**: ${TOTAL_FILES}"
+                echo "- **Total errors**: ${TOTAL_ERRORS}"
+              fi
             fi
-          fi
+      
+            echo ""
+            echo "### 🔗 Links"
+            echo "- [View detailed report](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})"
+            echo "- [Download artifacts](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}#artifacts)"
+          } >> "$GITHUB_STEP_SUMMARY"
 
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "### 🔗 Links" >> $GITHUB_STEP_SUMMARY
-          echo "- [View detailed report](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})" >> $GITHUB_STEP_SUMMARY
-          echo "- [Download artifacts](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}#artifacts)" >> $GITHUB_STEP_SUMMARY
 
       # Set APPLY_FIXES_IF var for use in future steps
       - name: Set APPLY_FIXES_IF var
