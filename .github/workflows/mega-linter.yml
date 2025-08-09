@@ -68,6 +68,7 @@ jobs:
       actions: write
       security-events: write
       statuses: write
+      workflows: write
 
     steps:
       # Git Checkout
