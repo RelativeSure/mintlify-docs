@@ -47,7 +47,14 @@ concurrency:
   group: ${{ github.ref }}-${{ github.workflow }}
   cancel-in-progress: true
 
-permissions: {}
+permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+      actions: write
+      security-events: write
+      statuses: write
+      workflows: write
 
 jobs:
   megalinter:
@@ -61,13 +68,6 @@ jobs:
 
     # Give the default GITHUB_TOKEN write permission to commit and push, comment
     # issues & post new PR; remove the ones you do not need
-    permissions:
-      contents: write
-      issues: write
-      pull-requests: write
-      actions: write
-      security-events: write
-      statuses: write
 
     steps:
       # Git Checkout
@@ -79,12 +79,12 @@ jobs:
           fetch-depth: 0
 
       - name: Cache MegaLinter files
-  uses: actions/cache@v4
-  with:
-    path: |
-      ~/.cache/megalinter
-      /tmp/megalinter-cache
-    key: ${{ runner.os }}-megalinter-files-v8.8.0-${{ hashFiles('**/.mega-linter.yml') }}
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/megalinter
+            /tmp/megalinter-cache
+          key: ${{ runner.os }}-megalinter-files-v8.8.0-${{ hashFiles('**/.mega-linter.yml') }}
 
       - name: Cache Docker layers
         uses: actions/cache@v4
