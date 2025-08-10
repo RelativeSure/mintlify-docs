@@ -1,167 +1,15 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "linden",
-  "name": "Rasmus - Platform/DevOps Engineer",
+  "name": "Rasmus's Docs",
   "favicon": "/favicon.svg",
   "colors": {
     "primary": "#2563eb",
     "light": "#3b82f6",
     "dark": "#1d4ed8"
   },
-  "navigation": {
-    "dropdowns": [
-      {
-        "dropdown": "👨‍💻 About Me",
-        "icon": "user",
-        "description": "Professional profile and background",
-        "groups": [
-          {
-            "group": "Introduction",
-            "pages": [
-              "about/introduction"
-            ]
-          }
-        ]
-      },
-      {
-        "dropdown": "🔧 DevOps & Infrastructure",
-        "icon": "server",
-        "description": "Infrastructure, automation, and platform engineering guides",
-        "groups": [
-          {
-            "group": "Overview",
-            "pages": [
-              "infrastructure/index"
-            ]
-          },
-          {
-            "group": "Linux Systems",
-            "pages": [
-              "infrastructure/linux/overview",
-              "infrastructure/linux/fundamentals",
-              "infrastructure/linux/system-admin",
-              "infrastructure/linux/automation"
-            ]
-          },
-          {
-            "group": "Windows Administration",
-            "pages": [
-              "infrastructure/windows/overview",
-              "infrastructure/windows/powershell",
-              "infrastructure/windows/wsl"
-            ]
-          },
-          {
-            "group": "Container Orchestration",
-            "pages": [
-              "infrastructure/containers/kubernetes",
-              "infrastructure/containers/helm"
-            ]
-          }
-        ]
-      },
-      {
-        "dropdown": "💡 Tools & Resources",
-        "icon": "toolbox",
-        "description": "Curated tools, configurations, and useful resources",
-        "groups": [
-          {
-            "group": "Overview",
-            "pages": [
-              "tools/index"
-            ]
-          },
-          {
-            "group": "Development Tools",
-            "pages": [
-              "tools/development/overview",
-              "tools/development/git",
-              "tools/development/vscode",
-              "tools/development/nodejs"
-            ]
-          },
-          {
-            "group": "DevOps Utilities", 
-            "pages": [
-              "tools/devops/specfiles",
-              "tools/devops/automation"
-            ]
-          }
-        ]
-      },
-      {
-        "dropdown": "📚 Knowledge Base",
-        "icon": "book-open",
-        "description": "Organized bookmarks and reference materials",
-        "groups": [
-          {
-            "group": "Overview",
-            "pages": [
-              "knowledge/index"
-            ]
-          },
-          {
-            "group": "Technology & Development",
-            "pages": [
-              "knowledge/tech-tools",
-              "knowledge/development",
-              "knowledge/ai-resources",
-              "knowledge/networking"
-            ]
-          },
-          {
-            "group": "Infrastructure & Security",
-            "pages": [
-              "knowledge/linux-resources",
-              "knowledge/kubernetes-resources", 
-              "knowledge/security"
-            ]
-          },
-          {
-            "group": "Platforms & Services",
-            "pages": [
-              "knowledge/windows-resources",
-              "knowledge/discord",
-              "knowledge/miscellaneous"
-            ]
-          }
-        ]
-      },
-      {
-        "dropdown": "🚀 Projects",
-        "icon": "rocket",
-        "description": "Personal projects and ongoing work",
-        "groups": [
-          {
-            "group": "Active Development",
-            "pages": [
-              "projects/index",
-              "projects/overview",
-              "projects/autocopr",
-              "projects/work-in-progress"
-            ]
-          }
-        ]
-      },
-      {
-        "dropdown": "🌐 Documentation Hub",
-        "icon": "book-bookmark",
-        "description": "About this documentation site (docs.rasmusj.dk)",
-        "groups": [
-          {
-            "group": "Documentation Site",
-            "pages": [
-              "meta/index",
-              "meta/about-docs-site"
-            ]
-          }
-        ]
-      }
-    ]
-  },
   "tabs": [
     {
-      "name": "Quick Start",
+      "name": "About Me",
       "url": "about"
     },
     {
@@ -169,8 +17,102 @@
       "url": "infrastructure"
     },
     {
-      "name": "Resources",
-      "url": "resources"
+      "name": "Tools",
+      "url": "tools"
+    },
+    {
+      "name": "Knowledge Base",
+      "url": "knowledge"
+    },
+    {
+      "name": "Projects",
+      "url": "projects"
+    }
+  ],
+  "navigation": [
+    {
+      "group": "Introduction",
+      "pages": [
+        "about/introduction"
+      ]
+    },
+    {
+      "group": "Infrastructure",
+      "pages": [
+        "infrastructure/linux/overview",
+        {
+          "group": "Linux",
+          "pages": [
+            "infrastructure/linux/fundamentals",
+            "infrastructure/linux/system-admin",
+            "infrastructure/linux/automation"
+          ]
+        },
+        {
+          "group": "Windows",
+          "pages": [
+            "infrastructure/windows/overview",
+            "infrastructure/windows/powershell",
+            "infrastructure/windows/wsl"
+          ]
+        },
+        {
+          "group": "Containers",
+          "pages": [
+            "infrastructure/containers/kubernetes",
+            "infrastructure/containers/helm"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "Tools",
+      "pages": [
+        "tools/development/overview",
+        {
+            "group": "Development",
+            "pages": [
+                "tools/development/git",
+                "tools/development/vscode",
+                "tools/development/nodejs"
+            ]
+        },
+        {
+            "group": "DevOps",
+            "pages": [
+                "tools/devops/specfiles",
+                "tools/devops/automation"
+            ]
+        }
+      ]
+    },
+    {
+      "group": "Knowledge Base",
+      "pages": [
+        "knowledge/tech-tools",
+        "knowledge/development",
+        "knowledge/ai-resources",
+        "knowledge/networking",
+        "knowledge/linux-resources",
+        "knowledge/kubernetes-resources",
+        "knowledge/security",
+        "knowledge/windows-resources",
+        "knowledge/discord",
+        "knowledge/miscellaneous"
+      ]
+    },
+    {
+      "group": "Projects",
+      "pages": [
+        "projects/autocopr",
+        "projects/work-in-progress"
+      ]
+    },
+    {
+        "group": "Meta",
+        "pages": [
+            "meta/about-docs-site"
+        ]
     }
   ],
   "anchors": [
@@ -180,7 +122,7 @@
       "url": "https://github.com"
     },
     {
-      "name": "LinkedIn", 
+      "name": "LinkedIn",
       "icon": "linkedin",
       "url": "https://linkedin.com"
     }
