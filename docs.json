@@ -8,114 +8,114 @@
     "light": "#3b82f6",
     "dark": "#1d4ed8"
   },
-  "tabs": [
-    {
-      "name": "About Me",
-      "url": "about"
-    },
-    {
-      "name": "Infrastructure",
-      "url": "infrastructure"
-    },
-    {
-      "name": "Tools",
-      "url": "tools"
-    },
-    {
-      "name": "Knowledge Base",
-      "url": "knowledge"
-    },
-    {
-      "name": "Projects",
-      "url": "projects"
-    }
-  ],
-  "navigation": [
-    {
-      "group": "Introduction",
-      "pages": [
-        "about/introduction"
-      ]
-    },
-    {
-      "group": "Infrastructure",
-      "pages": [
-        "infrastructure/linux/overview",
-        {
-          "group": "Linux",
-          "pages": [
-            "infrastructure/linux/fundamentals",
-            "infrastructure/linux/system-admin",
-            "infrastructure/linux/automation"
-          ]
-        },
-        {
-          "group": "Windows",
-          "pages": [
-            "infrastructure/windows/overview",
-            "infrastructure/windows/powershell",
-            "infrastructure/windows/wsl"
-          ]
-        },
-        {
-          "group": "Containers",
-          "pages": [
-            "infrastructure/containers/kubernetes",
-            "infrastructure/containers/helm"
-          ]
-        }
-      ]
-    },
-    {
-      "group": "Tools",
-      "pages": [
-        "tools/development/overview",
-        {
+  "navigation": {
+    "dropdowns": [
+      {
+        "dropdown": "About Me",
+        "groups": [
+          {
+            "group": "Introduction",
+            "pages": [
+              "about/introduction"
+            ]
+          }
+        ]
+      },
+      {
+        "dropdown": "Infrastructure",
+        "groups": [
+          {
+            "group": "Linux",
+            "pages": [
+              "infrastructure/linux/overview",
+              "infrastructure/linux/fundamentals",
+              "infrastructure/linux/system-admin",
+              "infrastructure/linux/automation"
+            ]
+          },
+          {
+            "group": "Windows",
+            "pages": [
+              "infrastructure/windows/overview",
+              "infrastructure/windows/powershell",
+              "infrastructure/windows/wsl"
+            ]
+          },
+          {
+            "group": "Containers",
+            "pages": [
+              "infrastructure/containers/kubernetes",
+              "infrastructure/containers/helm"
+            ]
+          }
+        ]
+      },
+      {
+        "dropdown": "Tools",
+        "groups": [
+          {
             "group": "Development",
             "pages": [
-                "tools/development/git",
-                "tools/development/vscode",
-                "tools/development/nodejs"
+              "tools/development/overview",
+              "tools/development/git",
+              "tools/development/vscode",
+              "tools/development/nodejs"
             ]
-        },
-        {
+          },
+          {
             "group": "DevOps",
             "pages": [
-                "tools/devops/specfiles",
-                "tools/devops/automation"
+              "tools/devops/specfiles",
+              "tools/devops/automation"
             ]
-        }
-      ]
-    },
-    {
-      "group": "Knowledge Base",
-      "pages": [
-        "knowledge/tech-tools",
-        "knowledge/development",
-        "knowledge/ai-resources",
-        "knowledge/networking",
-        "knowledge/linux-resources",
-        "knowledge/kubernetes-resources",
-        "knowledge/security",
-        "knowledge/windows-resources",
-        "knowledge/discord",
-        "knowledge/miscellaneous"
-      ]
-    },
-    {
-      "group": "Projects",
-      "pages": [
-        "projects/autocopr",
-        "projects/work-in-progress"
-      ]
-    },
-    {
-        "group": "Meta",
-        "pages": [
-            "meta/about-docs-site"
+          }
         ]
-    }
-  ],
+      },
+      {
+        "dropdown": "Knowledge Base",
+        "groups": [
+          {
+            "group": "Knowledge Base",
+            "pages": [
+              "knowledge/tech-tools",
+              "knowledge/development",
+              "knowledge/ai-resources",
+              "knowledge/networking",
+              "knowledge/linux-resources",
+              "knowledge/kubernetes-resources",
+              "knowledge/security",
+              "knowledge/windows-resources",
+              "knowledge/discord",
+              "knowledge/miscellaneous"
+            ]
+          }
+        ]
+      },
+      {
+        "dropdown": "Projects",
+        "groups": [
+          {
+            "group": "Projects",
+            "pages": [
+              "projects/autocopr",
+              "projects/work-in-progress"
+            ]
+          }
+        ]
+      },
+      {
+        "dropdown": "Meta",
+        "groups": [
+          {
+            "group": "Meta",
+            "pages": [
+              "meta/about-docs-site"
+            ]
+          }
+        ]
+      }
+    ]
+  },
   "anchors": [
     {
       "name": "GitHub",
