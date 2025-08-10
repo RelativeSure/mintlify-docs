@@ -87,16 +87,16 @@ jobs:
           path: |
             ~/.cache/megalinter
             /tmp/megalinter-cache
-          key: ${{ runner.os }}-megalinter-${{ hashFiles('**/.mega-linter.yml', '**/megalinter.yml') }}
+          key: ${{ runner.os }}-megalinter-v8.8.0-${{ hashFiles('**/.mega-linter.yml', '**/megalinter.yml') }}
           restore-keys: |
-            ${{ runner.os }}-megalinter-
+            ${{ runner.os }}-megalinter-v8.8.0-
 
       # MegaLinter
       - name: MegaLinter
 
         # You can override MegaLinter flavor used to have faster performances
         # More info at https://megalinter.io/latest/flavors/
-        uses: oxsecurity/megalinter@v8
+        uses: oxsecurity/megalinter@v8.8.0
 
         id: ml
 
