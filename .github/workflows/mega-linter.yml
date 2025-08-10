@@ -73,21 +73,27 @@ jobs:
       # Git Checkout
       - name: Checkout Code
         uses: actions/checkout@v4
-        # with:
+        with:
           # If you use VALIDATE_ALL_CODEBASE = true, you can remove this line to
           # improve performance
-          # fetch-depth: 0
+          fetch-depth: 0
 
-      # Cache MegaLinter Docker images and dependencies
-      - name: Cache MegaLinter
+      - name: Cache MegaLinter files
+  uses: actions/cache@v4
+  with:
+    path: |
+      ~/.cache/megalinter
+      /tmp/megalinter-cache
+    key: ${{ runner.os }}-megalinter-files-v8.8.0-${{ hashFiles('**/.mega-linter.yml') }}
+
+      - name: Cache Docker layers
         uses: actions/cache@v4
         with:
-          path: |
-            ~/.cache/megalinter
-            /tmp/megalinter-cache
-          key: ${{ runner.os }}-megalinter-v8.8.0-${{ hashFiles('**/.mega-linter.yml', '**/megalinter.yml') }}
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-docker-megalinter-v8.8.0
           restore-keys: |
-            ${{ runner.os }}-megalinter-v8.8.0-
+      ${{ runner.os }}-docker-megalinter-
+
 
       # MegaLinter
       - name: MegaLinter
