@@ -143,7 +143,7 @@ jobs:
       # Upload SARIF results to GitHub Security tab
       - name: Upload SARIF results
         if: always()
-        uses: github/codeql-action/upload-sarif@e8893c57a1f3a2b659b6b55564fdfdbbd2982911 # v3.24.0
+        uses: github/codeql-action/upload-sarif@76621b61decf072c1cee8dd1ce2d2a82d33c17ed # v3.29.8
         with:
           sarif_file: megalinter-reports/megalinter-report.sarif
         continue-on-error: true
