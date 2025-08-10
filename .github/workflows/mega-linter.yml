@@ -47,20 +47,12 @@ concurrency:
   group: ${{ github.ref }}-${{ github.workflow }}
   cancel-in-progress: true
 
-permissions: {}
-
 jobs:
   megalinter:
     name: MegaLinter
     runs-on: ubuntu-latest
     timeout-minutes: 30  # Prevent hanging jobs
 
-    # Add environment protection for production deployments
-    environment: 
-      name: ${{ github.ref == 'refs/heads/main' && 'production' || 'development' }}
-
-    # Give the default GITHUB_TOKEN write permission to commit and push, comment
-    # issues & post new PR; remove the ones you do not need
     permissions:
       contents: write
       issues: write
@@ -68,28 +60,40 @@ jobs:
       actions: write
       security-events: write
       statuses: write
+      #workflows: write
+
+    # Add environment protection for production deployments
+   # environment: 
+   #   name: ${{ github.ref == 'refs/heads/main' && 'production' || 'development' }}
+
+    # Give the default GITHUB_TOKEN write permission to commit and push, comment
+    # issues & post new PR; remove the ones you do not need
 
     steps:
       # Git Checkout
       - name: Checkout Code
         uses: actions/checkout@v4
         with:
-          token: ${{ secrets.PAT || secrets.GITHUB_TOKEN }}
-
           # If you use VALIDATE_ALL_CODEBASE = true, you can remove this line to
           # improve performance
           fetch-depth: 0
 
-      # Cache MegaLinter Docker images and dependencies
-      - name: Cache MegaLinter
+      - name: Cache MegaLinter files
         uses: actions/cache@v4
         with:
           path: |
             ~/.cache/megalinter
             /tmp/megalinter-cache
-          key: ${{ runner.os }}-megalinter-v8.8.0-${{ hashFiles('**/.mega-linter.yml', '**/megalinter.yml') }}
+          key: ${{ runner.os }}-megalinter-files-v8.8.0-${{ hashFiles('**/.mega-linter.yml') }}
+
+      - name: Cache Docker layers
+        uses: actions/cache@v4
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-docker-megalinter-v8.8.0
           restore-keys: |
-            ${{ runner.os }}-megalinter-v8.8.0-
+            ${{ runner.os }}-docker-megalinter-
+
 
       # MegaLinter
       - name: MegaLinter
@@ -107,7 +111,7 @@ jobs:
           # main. Override with true if you always want to lint all sources
           #
           # To validate the entire codebase, set to:
-          # VALIDATE_ALL_CODEBASE: true
+          VALIDATE_ALL_CODEBASE: true
           #
           # To validate only diff with main, set to:
           # VALIDATE_ALL_CODEBASE: >-
@@ -115,11 +119,11 @@ jobs:
           #     github.event_name == 'push' &&
           #     contains(fromJSON('["refs/heads/main", "refs/heads/master"]'), github.ref)
           #   }}
-          VALIDATE_ALL_CODEBASE: >-
-            ${{
-              github.event_name == 'push' &&
-              contains(fromJSON('["refs/heads/main", "refs/heads/master"]'), github.ref)
-            }}
+          #VALIDATE_ALL_CODEBASE: >-
+          #  ${{
+          #   github.event_name == 'push' &&
+          #    contains(fromJSON('["refs/heads/main", "refs/heads/master"]'), github.ref)
+          #  }}
 
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -215,7 +219,8 @@ jobs:
         id: cpr
         if: env.APPLY_FIXES_IF_PR == 'true'
         with:
-          token: ${{ secrets.PAT || secrets.GITHUB_TOKEN }}
+         # token: ${{ secrets.PAT || secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: "[MegaLinter] Apply linters automatic fixes"
           title: "[MegaLinter] Apply linters automatic fixes"
           labels: bot
