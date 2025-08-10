@@ -60,7 +60,7 @@ jobs:
       actions: write
       security-events: write
       statuses: write
-      workflows: write
+      #workflows: write
 
     # Add environment protection for production deployments
    # environment: 
