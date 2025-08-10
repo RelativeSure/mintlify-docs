@@ -6,7 +6,7 @@ pages_build_output_dir = "./.mintlify/build"
 
 # Build configuration
 [build]
-command = "pnpm install && pnpm run build"
+command = "pnpm install && pnpm run dev"
 cwd = "."
 
 # Environment variables (optional)
