@@ -1,0 +1,15 @@
+name = "mintlify-docs"
+compatibility_date = "2025-08-07"
+
+# Pages-specific configuration
+pages_build_output_dir = "./.mintlify/build"
+
+# Build configuration
+[build]
+command = "pnpm install && pnpm run build"
+cwd = "."
+
+# Environment variables (optional)
+[env.production.vars]
+NODE_VERSION = "24"
+PNPM_VERSION = "10"
