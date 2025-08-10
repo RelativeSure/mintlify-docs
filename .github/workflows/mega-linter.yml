@@ -47,7 +47,13 @@ concurrency:
   group: ${{ github.ref }}-${{ github.workflow }}
   cancel-in-progress: true
 
-permissions:
+jobs:
+  megalinter:
+    name: MegaLinter
+    runs-on: ubuntu-latest
+    timeout-minutes: 30  # Prevent hanging jobs
+
+    permissions:
       contents: write
       issues: write
       pull-requests: write
@@ -55,12 +61,6 @@ permissions:
       security-events: write
       statuses: write
       workflows: write
-
-jobs:
-  megalinter:
-    name: MegaLinter
-    runs-on: ubuntu-latest
-    timeout-minutes: 30  # Prevent hanging jobs
 
     # Add environment protection for production deployments
     environment: 
@@ -92,7 +92,7 @@ jobs:
           path: /tmp/.buildx-cache
           key: ${{ runner.os }}-docker-megalinter-v8.8.0
           restore-keys: |
-      ${{ runner.os }}-docker-megalinter-
+            ${{ runner.os }}-docker-megalinter-
 
 
       # MegaLinter
@@ -220,6 +220,7 @@ jobs:
         if: env.APPLY_FIXES_IF_PR == 'true'
         with:
          # token: ${{ secrets.PAT || secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: "[MegaLinter] Apply linters automatic fixes"
           title: "[MegaLinter] Apply linters automatic fixes"
           labels: bot
