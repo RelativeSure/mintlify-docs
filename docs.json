@@ -1,7 +1,7 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "linden",
-  "name": "Rasmus - Platform/DevOps Engineer",
+  "name": "Rasmus's Docs",
   "favicon": "/favicon.svg",
   "colors": {
     "primary": "#2563eb",
@@ -13,7 +13,6 @@
       {
         "dropdown": "👨‍💻 About Me",
         "icon": "user",
-        "description": "Professional profile and background",
         "groups": [
           {
             "group": "Introduction",
@@ -26,16 +25,9 @@
       {
         "dropdown": "🔧 DevOps & Infrastructure",
         "icon": "server",
-        "description": "Infrastructure, automation, and platform engineering guides",
         "groups": [
           {
-            "group": "Overview",
-            "pages": [
-              "infrastructure/index"
-            ]
-          },
-          {
-            "group": "Linux Systems",
+            "group": "Linux",
             "pages": [
               "infrastructure/linux/overview",
               "infrastructure/linux/fundamentals",
@@ -44,7 +36,7 @@
             ]
           },
           {
-            "group": "Windows Administration",
+            "group": "Windows",
             "pages": [
               "infrastructure/windows/overview",
               "infrastructure/windows/powershell",
@@ -52,7 +44,7 @@
             ]
           },
           {
-            "group": "Container Orchestration",
+            "group": "Containers",
             "pages": [
               "infrastructure/containers/kubernetes",
               "infrastructure/containers/helm"
@@ -63,16 +55,9 @@
       {
         "dropdown": "💡 Tools & Resources",
         "icon": "toolbox",
-        "description": "Curated tools, configurations, and useful resources",
         "groups": [
           {
-            "group": "Overview",
-            "pages": [
-              "tools/index"
-            ]
-          },
-          {
-            "group": "Development Tools",
+            "group": "Development",
             "pages": [
               "tools/development/overview",
               "tools/development/git",
@@ -81,7 +66,7 @@
             ]
           },
           {
-            "group": "DevOps Utilities", 
+            "group": "DevOps",
             "pages": [
               "tools/devops/specfiles",
               "tools/devops/automation"
@@ -92,34 +77,17 @@
       {
         "dropdown": "📚 Knowledge Base",
         "icon": "book-open",
-        "description": "Organized bookmarks and reference materials",
         "groups": [
           {
-            "group": "Overview",
-            "pages": [
-              "knowledge/index"
-            ]
-          },
-          {
-            "group": "Technology & Development",
+            "group": "Knowledge Base",
             "pages": [
               "knowledge/tech-tools",
               "knowledge/development",
               "knowledge/ai-resources",
-              "knowledge/networking"
-            ]
-          },
-          {
-            "group": "Infrastructure & Security",
-            "pages": [
+              "knowledge/networking",
               "knowledge/linux-resources",
-              "knowledge/kubernetes-resources", 
-              "knowledge/security"
-            ]
-          },
-          {
-            "group": "Platforms & Services",
-            "pages": [
+              "knowledge/kubernetes-resources",
+              "knowledge/security",
               "knowledge/windows-resources",
               "knowledge/discord",
               "knowledge/miscellaneous"
@@ -130,13 +98,10 @@
       {
         "dropdown": "🚀 Projects",
         "icon": "rocket",
-        "description": "Personal projects and ongoing work",
         "groups": [
           {
-            "group": "Active Development",
+            "group": "Projects",
             "pages": [
-              "projects/index",
-              "projects/overview",
               "projects/autocopr",
               "projects/work-in-progress"
             ]
@@ -146,12 +111,10 @@
       {
         "dropdown": "🌐 Documentation Hub",
         "icon": "book-bookmark",
-        "description": "About this documentation site (docs.rasmusj.dk)",
         "groups": [
           {
-            "group": "Documentation Site",
+            "group": "Meta",
             "pages": [
-              "meta/index",
               "meta/about-docs-site"
             ]
           }
@@ -159,20 +122,6 @@
       }
     ]
   },
-  "tabs": [
-    {
-      "name": "Quick Start",
-      "url": "about"
-    },
-    {
-      "name": "Infrastructure",
-      "url": "infrastructure"
-    },
-    {
-      "name": "Resources",
-      "url": "resources"
-    }
-  ],
   "anchors": [
     {
       "name": "GitHub",
@@ -180,7 +129,7 @@
       "url": "https://github.com"
     },
     {
-      "name": "LinkedIn", 
+      "name": "LinkedIn",
       "icon": "linkedin",
       "url": "https://linkedin.com"
     }
