@@ -1,0 +1,14 @@
+---
+title: Troubleshooting
+description: Common Windows issues and how to resolve them.
+---
+
+## PC Not Sleeping
+
+If your PC isn't going to sleep, you can use the `powercfg` command to diagnose the issue. Open an elevated command prompt or PowerShell window and run the following command:
+
+```shell
+powercfg /requests
+```
+
+This command will list any active power requests that are preventing your computer from automatically turning off the display or entering sleep mode. By identifying the application or driver making the request, you can address the root cause of the problem.
