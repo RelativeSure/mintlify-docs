@@ -63,8 +63,8 @@ jobs:
       workflows: write
 
     # Add environment protection for production deployments
-    environment: 
-      name: ${{ github.ref == 'refs/heads/main' && 'production' || 'development' }}
+   # environment: 
+   #   name: ${{ github.ref == 'refs/heads/main' && 'production' || 'development' }}
 
     # Give the default GITHUB_TOKEN write permission to commit and push, comment
     # issues & post new PR; remove the ones you do not need
