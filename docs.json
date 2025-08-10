@@ -11,7 +11,8 @@
   "navigation": {
     "dropdowns": [
       {
-        "dropdown": "About Me",
+        "dropdown": "👨‍💻 About Me",
+        "icon": "user",
         "groups": [
           {
             "group": "Introduction",
@@ -22,7 +23,8 @@
         ]
       },
       {
-        "dropdown": "Infrastructure",
+        "dropdown": "🔧 DevOps & Infrastructure",
+        "icon": "server",
         "groups": [
           {
             "group": "Linux",
@@ -51,7 +53,8 @@
         ]
       },
       {
-        "dropdown": "Tools",
+        "dropdown": "💡 Tools & Resources",
+        "icon": "toolbox",
         "groups": [
           {
             "group": "Development",
@@ -72,7 +75,8 @@
         ]
       },
       {
-        "dropdown": "Knowledge Base",
+        "dropdown": "📚 Knowledge Base",
+        "icon": "book-open",
         "groups": [
           {
             "group": "Knowledge Base",
@@ -92,7 +96,8 @@
         ]
       },
       {
-        "dropdown": "Projects",
+        "dropdown": "🚀 Projects",
+        "icon": "rocket",
         "groups": [
           {
             "group": "Projects",
@@ -104,7 +109,8 @@
         ]
       },
       {
-        "dropdown": "Meta",
+        "dropdown": "🌐 Documentation Hub",
+        "icon": "book-bookmark",
         "groups": [
           {
             "group": "Meta",
