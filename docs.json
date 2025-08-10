@@ -1,5 +1,6 @@
 {
   "$schema": "https://mintlify.com/docs.json",
+  "theme": "linden",
   "name": "Rasmus's Docs",
   "favicon": "/favicon.svg",
   "colors": {
